@@ -30,6 +30,5 @@ return array (
     'empty' => 'No hay registros',
     'currency' => 'Moneda',
     'lang' => 'Lenguaje'
-  ),
-  'update' => 'Modificando el País:'
+  )
 );

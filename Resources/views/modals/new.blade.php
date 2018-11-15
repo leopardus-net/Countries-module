@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group">
 	                    <label class="control-label">@lang('country::countries.form.currency')</label>  
-	                    <select name="currency" class="form-control" onchange="changeLang($event);">
+	                    <select name="currency" class="form-control">
 	                    	<option value="">@lang('country::countries.form.select_currencies')</option>
 	                        @foreach( $currencies as $currency )
 	                        <option value="{{ $currency->id }}">
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
 	                    <label class="control-label">@lang('country::countries.form.lang')</label>  
-	                    <select name="lang" class="form-control" onchange="changeLang($event);">
+	                    <select name="lang" class="form-control">
 	                    	<option value="">@lang('country::countries.form.select_lang')</option>
 	                        @foreach( $languajes as $lang )
 	                        <option value="{{ $lang->id }}">

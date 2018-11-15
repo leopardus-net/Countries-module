@@ -26,6 +26,21 @@
     <!-- Countries table -->
     <div class="row">
         <div class="col-12">
+            @if($errors->any())
+              <div class="alert alert-danger">
+                  <ul class="no-margin" style="margin: 0">
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+              <br>
+            @endif
+            @if(session('action'))
+                <div class="alert alert-success">
+                    {{ trans('currency::currencies.alerts.' . session('action')) }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">{{trans('country::countries.added_countries')}}</h4>
@@ -58,6 +73,7 @@
                                             <form  class="form-delete" method="POST" 
                                                 style="display: inline-block;" 
                                                 action="{{ route('countries.destroy', $country->id) }}"> 
+                                                @method('delete')
                                                 @csrf
                                                 <button name="delete-modal" data-toggle="tooltip" data-original-title="Delete" class="btn text-white btn-danger"> <i class="fas fa-trash"></i> 
                                                 </button>

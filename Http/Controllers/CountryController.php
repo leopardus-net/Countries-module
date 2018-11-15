@@ -64,6 +64,14 @@ class CountryController extends Controller
                 ->with('success' , trans('country::country.stored'));
     }
 
+    public function modify($id)
+    {
+         return view('country::update', [
+            'country' => Country::findOrFail($id),
+            'currencies' => Currency::all()
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      * @param  Request $request
@@ -76,9 +84,14 @@ class CountryController extends Controller
 
         // Validaciones
         $validator = \Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:countries,slug,' . $country->id . ',id',
-            'currency_id' => "required|integer|max:11",
-            'lang_id' => 'required|integer|max:11',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('countries', 'slug')->ignore($country->id)->ignore($country->slug, 'slug')
+            ],
+            'currency' => "required|integer|max:11",
+            'lang' => 'required|integer|max:11',
         ]);
 
         if ($validator->fails()) {
